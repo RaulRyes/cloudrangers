@@ -5,9 +5,9 @@ pipeline{
         maven 'maven'
     }
     environment{
-        ArtifactId = readMavenPom().getArtifactId
+        ArtifactId = readMavenPom().getArtifactId()
         Version = readMavenPom().getVersion()
-        Name = readMavenPom().getName
+        Name = readMavenPom().getName()
     }
 
 
