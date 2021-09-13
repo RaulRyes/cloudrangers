@@ -64,7 +64,20 @@ pipeline{
         //Stage 5 Deploying 
         stage ('Deploy'){
             steps{
-                echo 'Deploying.....'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controler',
+                    transfers: [
+                            sshTransfer(
+                                    cleanRemote:false,
+                                    execCommand: 'ansible-playbook /opt/playbooks/installanddownload.yaml -i /opt/playbooks/hosts',
+                                    execTimeout: 12000
+                            )
+                    ], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                    ])
             }
         }
 
